@@ -18,7 +18,7 @@ VARIABLE stack, history, output, values
 Init == /\ stack = <<>>  \* the current state of the stack
         /\ output = <<>> \* the output of the values removed by pop
         /\ history = <<>> \* the sequence of push / pops taken
-        /\ values = <<"a", "b","c", "d","e", "f">> \* values put on the stack are taken from this sequence
+        /\ values = <<"a", "b", "c", "d", "e", "f">> \* values put on the stack are taken from this sequence
 
 Next == \* push
         \/ /\ values # <<>>         
@@ -41,7 +41,10 @@ P2 == (output = <<"b", "a", "c", "f", "d", "e">>)
 P3 == (output = <<"b", "a", "c", "f", "e", "d">>)
 P4 == (output = <<"a", "c", "d", "b", "e", "f">>)
 
+
+\* Unfinished termination proof -- probably easier to prove <>[] stack = <<>> + action for stack = <<>> instead of deadlock 
 Termination == []<>~ENABLED(Next)
+
 
 LEMMA Spec => Termination
 <1> SUFFICES ASSUME Spec PROVE Termination OBVIOUS
@@ -55,5 +58,5 @@ LEMMA Spec => Termination
 
 =============================================================================
 \* Modification History
-\* Last modified Tue Jul 19 17:12:17 CEST 2022 by marty
+\* Last modified Tue Jul 19 22:02:10 CEST 2022 by marty
 \* Created Fri Jun 03 17:11:03 CEST 2022 by marty
